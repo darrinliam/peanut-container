@@ -41,10 +41,15 @@ From the directory containing package.json, run
 
 rhyme is a small rhyme-finding app with a dummy database containing a limited number of rhyme families. Its output will look like:
 
+
 Connected to:  dummyServer
+
 Fetching rhyming words...
+
 Disconnected from:  dummyServer
+
 { rhyming_words: [ 'asunder', 'plunder', 'under' ] }
+
 
 
 
