@@ -8,7 +8,7 @@ Peanut Container currently supports two kinds of module definitions: classes and
 Installation
 ------------
 
-As the library is still private, download the zip and expand in an empty directory.
+Download the zip and expand in an empty directory.
 
 Usage
 -----  
