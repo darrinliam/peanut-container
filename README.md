@@ -1,7 +1,7 @@
 # peanut-container
 Peanut Container
 
-This is a Node.js-based IoC container class that associates dependencies with each module so the deps can be injected into class constructors when module is retrieved via get() method. 
+This is a Node.js-based IoC container class that associates dependencies with each module so the deps can be injected into class constructors when the module is retrieved via the get() method.
 
 Peanut Container currently supports two kinds of module definitions: classes and objects.
 
@@ -12,24 +12,24 @@ Download the zip and expand in an empty directory.
 
 Usage
 -----  
-Require peanutContainer and all module definitons:
+Require peanutContainer and all module definitons. This can all be done in one file, without the need to require dependencies in the files where they are needed:
 
-  const peanutContainerClass = require('../peanutContainer');
+  const peanutContainerClass = require('./peanutContainer');
 
   const peanutContainer = new peanutContainerClass();
 
   const myServiceClass = require('./myService);
 
 
-definitions may be mock definitions for testing purposes.
+Definitions may be mock definitions for testing purposes.
 
 
-Register your modules and their dependencies with register(). Each restration requires a name, a dependency list, and a definition (implementation):
+Register your modules and their dependencies with register(). Each registration requires a name, a dependency list, and a definition (its implementation):
  
   peanutContainer.register({ name: 'myService', deps: [dep1, dep2, …], def: myServiceClass });
 
 
-Get the module. The dependency injection into the constructors happen at this time.
+Get the module. The dependency injection into the constructors happens at this time:
 
   myApp = peanutContainer.get('myService');
 
