@@ -1,0 +1,15 @@
+{
+  "name": "peanut-container",
+  "version": "1.0.0",
+  "description": "Node.js IoC container that injects dependencies into constructors.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Darrin DuFord",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^8.3.2"
+  }
+}
