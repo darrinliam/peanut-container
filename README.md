@@ -12,30 +12,32 @@ As the library is still private, download the zip and expand in an empty directo
 
 Usage
 -----  
-1) require peanutContainer and all module definitons:
-2) 
-const peanutContainerClass = require('../peanutContainer');
+Require peanutContainer and all module definitons:
 
-const peanutContainer = new peanutContainerClass();
+  const peanutContainerClass = require('../peanutContainer');
 
-const myServiceClass = require('./myService);
+  const peanutContainer = new peanutContainerClass();
+
+  const myServiceClass = require('./myService);
 
 
 definitions may be mock definitions for testing purposes.
 
-2) register your modules and their dependencies with register(). Each restration requires a name, a dependency list, and a definition (implementation):
+
+Register your modules and their dependencies with register(). Each restration requires a name, a dependency list, and a definition (implementation):
  
-peanutContainer.register({ name: 'myService', deps: [dep1, dep2, …], def: myServiceClass });
+  peanutContainer.register({ name: 'myService', deps: [dep1, dep2, …], def: myServiceClass });
 
-3) get the module. The dependency injection into the constructors happen at this time.
 
-myApp = peanutContainer.get('myService');
+Get the module. The dependency injection into the constructors happen at this time.
+
+  myApp = peanutContainer.get('myService');
 
 Example
 -------
 From the directory containing package.json, run
 
-Node ./examples/rhyme
+  node ./examples/rhyme
 
 rhyme is a small rhyme-finding app with a dummy database containing a limited number of rhyme families. Its output will look like:
 
