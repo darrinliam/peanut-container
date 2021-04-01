@@ -19,7 +19,7 @@ class peanutContainer {
      * @param {string[]} dependencies
      * @return {string[]|null}
      */
-	findCycle(modName, deps) {
+    findCycle(modName, deps) {
         let depChain = [];
         let newMod = modName;
         let cycle = (modName, deps) => {
@@ -55,8 +55,8 @@ class peanutContainer {
             if (this.modlist[mod.name] !== undefined) {
                 throw new Error(`Module {mod.name} is already registered.`);
             }
-			if (mod.name === undefined || mod.deps === undefined || mod.def === undefined)
-			    throw new Error(`name, deps, and definition are required for registering a module.`);
+            if (mod.name === undefined || mod.deps === undefined || mod.def === undefined)
+                throw new Error(`name, deps, and definition are required for registering a module.`);
 
             let cyc = this.findCycle(mod.name, mod.deps);
             if (cyc) {
@@ -64,7 +64,7 @@ class peanutContainer {
                 throw new Error(`Dependency cycle found: ${cyc}.`);
             }
 
-            var moduleReg = {
+            let moduleReg = {
                 name: mod.name,
                 deps: mod.deps
             };
@@ -84,9 +84,9 @@ class peanutContainer {
         } catch (e) {
             console.warn(e);
             this.removeAll();
-			return null;
+            return null;
         }
-		return this.modlist[mod.name];
+        return this.modlist[mod.name];
     }
 
     /** Creates instance of module and injects dependencies into its constructor.
@@ -95,9 +95,8 @@ class peanutContainer {
      *	 @return {object} - module instance
      */
     get(moduleName) {
+        let moduleReg = this.modlist[moduleName];
         try {
-            var moduleReg = this.modlist[moduleName];
-
             if (moduleReg === undefined)
                 throw new Error(`Module ${moduleName} not found`);
 
@@ -119,12 +118,11 @@ class peanutContainer {
                     console.warn(`Instantiation failed for ${moduleName}`);
                 }
             }
-
         } catch (e) {
             console.warn(e);
             return null;
         }
-		return moduleReg.instance;
+        return moduleReg.instance;
     }
 
     /** removes all modules from module list.
