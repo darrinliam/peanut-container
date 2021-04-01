@@ -28,7 +28,7 @@ definitions may be mock definitions for testing purposes.
 peanutContainer.register({ name: 'myService', deps: [dep1, dep2, …], def: myServiceClass });
 
 3) get the module. The dependency injection into the constructors happen at this time.
-4) 
+
 myApp = peanutContainer.get('myService');
 
 Example
