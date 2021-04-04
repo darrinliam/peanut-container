@@ -51,11 +51,6 @@ class fetchRhymesTesterClass {
         }
         return outData;
     }
-};
-
-
-const fetchRhymesTesterFactory = () => {
-
 }
 
 module.exports = fetchRhymesTesterClass;

@@ -75,7 +75,7 @@ class peanutContainer {
                 else
                     throw new Error(`Module must be a class: ${mod.name}`);
             } else { // could be just data / object
-                if (mod.deps.length == 0)
+                if (mod.deps.length === 0)
                     moduleReg.instance = mod.def;
                 else
                     throw new Error(`Module ${mod.name} is not a function and cannot have dependencies.`);
@@ -105,7 +105,7 @@ class peanutContainer {
 
                 for (let dep of moduleReg.deps) {
                     moduleDeps.push(this.get(dep));
-                };
+                }
 
                 if (typeof(moduleReg.def) === 'function') {
                     // Inject dependencies into constructor.
@@ -131,6 +131,6 @@ class peanutContainer {
     removeAll() {
         this.modlist = {};
     }
-};
+}
 
 module.exports = peanutContainer;
