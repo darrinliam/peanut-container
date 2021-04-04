@@ -1,56 +1,46 @@
 # peanut-container
-Peanut Container
 
-This is a Node.js-based IoC container class that associates dependencies with each module so the deps can be injected into class constructors when the module is retrieved via the get() method.
+Peanut Container is a Node.js-based IoC container class that associates dependencies with each module so the dependencies can be injected into class constructors when the module is retrieved via the get() method.
 
 Peanut Container currently supports two kinds of module definitions: classes and objects.
 
-Installation
-------------
+# Installation
 
-Download the zip and expand in an empty directory.
+Clone the repository or download the zip and expand in an empty directory.
 
-Usage
------  
-Require peanutContainer and all module definitons. This can all be done in one file, without the need to require dependencies in the files where they are needed:
+# Usage
 
-  const peanutContainerClass = require('./peanutContainer');
+Require peanutContainer and all of your module definitons. This can all be done in one file, without the need to require dependencies in the files where they are needed:
 
-  const peanutContainer = new peanutContainerClass();
+> `const peanutContainerClass = require('./peanutContainer');`
 
-  const myServiceClass = require('./myService);
+> `const peanutContainer = new peanutContainerClass();`
+
+> `const myServiceClass = require('./myService);`
 
 
 Definitions may be mock definitions for testing purposes.
 
-
 Register your modules and their dependencies with register(). Each registration requires a name, a dependency list, and a definition (its implementation):
- 
-  peanutContainer.register({ name: 'myService', deps: [dep1, dep2, …], def: myServiceClass });
 
+> `peanutContainer.register({ name: 'myService', deps: [dep1, dep2, …], def: myServiceClass });`
 
 Get the module. The dependency injection into the constructors happens at this time:
 
-  myApp = peanutContainer.get('myService');
+> `myApp = peanutContainer.get('myService');`
 
-Example
--------
-From the directory containing package.json, run
+# Example
 
-  node ./examples/rhyme
+From the directory containing `package.json`, run
 
-rhyme is a small rhyme-finding app with a dummy database containing a limited number of rhyme families. Its output will look like:
+> `node ./examples/rhyme`
 
+`rhyme` is a small rhyme-finding app with a dummy database containing a limited number of rhyme families. Its output will look like:
 
-Connected to:  dummyServer
+> `Connected to: dummyServer`
 
-Fetching rhyming words...
+> `Fetching rhyming words...`
 
-Disconnected from:  dummyServer
+> `Disconnected from: dummyServer`
 
-{ rhyming_words: [ 'asunder', 'plunder', 'under' ] }
-
-
-
-
-
+> `{ rhyming_words: [ 'asunder', 'plunder', 'under' ] }`
