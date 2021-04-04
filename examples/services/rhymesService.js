@@ -1,9 +1,7 @@
-//
-
 class RhymesService {
 
 	constructor(database) {
-	  this.database = database;
+		this.database = database;
 	}
 
 	getRhymes(word) {

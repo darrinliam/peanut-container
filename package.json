@@ -4,12 +4,14 @@
   "description": "Node.js IoC container that injects dependencies into constructors.",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint **/*.js",
     "test": "mocha"
   },
   "author": "Darrin DuFord",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
+    "eslint": "^7.23.0",
     "mocha": "^8.3.2"
   }
 }
