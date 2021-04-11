@@ -18,20 +18,21 @@ const rdict = [
  */
 class fetchRhymesTesterClass {
 
-    constructor(config) {
+    constructor(config, dbMsg) {
         this.config = config;
+        this.dbMsg = dbMsg;
     }
 
     connect() {
-        console.log('Connected to: ', this.config.server);
+        console.log(`${this.dbMsg.connected}: ${this.config.server}`);
     }
 
     disconnect() {
-        console.log('Disconnected from: ', this.config.server);
+        console.log(`${this.dbMsg.disconnected}: ${this.config.server}`);
     }
 
     fetch(word) {
-        console.log('Fetching rhyming words...');
+        console.log(this.dbMsg.fetch);
         return this.queryDB(word);
     }
 

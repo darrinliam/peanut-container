@@ -9,10 +9,12 @@ const peanutContainer = new peanutContainerClass();
 const rootData = require('../examples/rootData');
 const fetchRhymesTesterClass = require('../examples/fetchRhymesTester');
 const rhymesServiceClass = require('../examples/services/rhymesService');
+const fetchMsgData = require('../examples/dbMsg.js');
 
 peanutContainer.register({ name: 'config', deps: [], def: rootData });
-peanutContainer.register({ name: 'fetchRhymes', deps: ['config'], def: fetchRhymesTesterClass });
+peanutContainer.register({ name: 'fetchRhymes', deps: ['config', 'fetchMsg'], def: fetchRhymesTesterClass });
 peanutContainer.register({ name: 'rhymesService', deps: ['fetchRhymes'], def: rhymesServiceClass});
+peanutContainer.register({ name: 'fetchMsg', deps: [], def: fetchMsgData})
 
 const rhymesApp = peanutContainer.get('rhymesService');
 

@@ -110,7 +110,7 @@ class peanutContainer {
                 if (typeof(moduleReg.def) === 'function') {
                     // Inject dependencies into constructor.
                     // to do: support factory functions, not just classes
-                    moduleReg.instance = new moduleReg.def(moduleDeps[0]);
+                    moduleReg.instance = new moduleReg.def(...moduleDeps);
                 } else
                     throw new Error(`Module must be a class: ${moduleName}`);
 
