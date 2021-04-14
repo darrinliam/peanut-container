@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint **/*.js",
-    "test": "mocha"
+    "test": "mocha",
+    "test-cover": "nyc --reporter=text mocha",
+    "test-cover-html": "nyc --reporter=html mocha"
   },
   "author": "Darrin DuFord",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
     "eslint": "^7.23.0",
-    "mocha": "^8.3.2"
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0"
   }
 }
