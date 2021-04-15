@@ -10,7 +10,7 @@
 class peanutContainer {
 
     constructor() {
-        this.modlist = {};
+        this.modList = {};
     }
 
     /**
@@ -29,8 +29,8 @@ class peanutContainer {
                     depChain.push(dep);
                     return depChain; // Cycle found. Return the sequence.
                 } else {
-                    if ((this.modlist[dep]) &&
-                        (cycle(dep, this.modlist[dep].deps)))
+                    if ((this.modList[dep]) &&
+                        (cycle(dep, this.modList[dep].deps)))
                         return depChain;
                     else
                         depChain.pop(); // backtrack. This dep path is OK.
@@ -52,8 +52,8 @@ class peanutContainer {
      */
     register(mod) {
         try {
-            if (this.modlist[mod.name] !== undefined) {
-                throw new Error(`Module {mod.name} is already registered.`);
+            if (this.modList[mod.name] !== undefined) {
+                throw new Error(`Module ${mod.name} is already registered.`);
             }
             if (mod.name === undefined || mod.deps === undefined || mod.def === undefined)
                 throw new Error(`name, deps, and definition are required for registering a module.`);
@@ -70,23 +70,20 @@ class peanutContainer {
             };
 
             if (typeof(mod.def) === 'function') {
-                if (/^\s*class\s+/.test(mod.def))
-                    moduleReg.def = mod.def;
-                else
-                    throw new Error(`Module must be a class: ${mod.name}`);
+                moduleReg.def = mod.def;
             } else { // could be just data / object
                 if (mod.deps.length === 0)
                     moduleReg.instance = mod.def;
                 else
                     throw new Error(`Module ${mod.name} is not a function and cannot have dependencies.`);
             }
-            this.modlist[mod.name] = moduleReg;
+            this.modList[mod.name] = moduleReg;
         } catch (e) {
             console.warn(e);
             this.removeAll();
             return null;
         }
-        return this.modlist[mod.name];
+        return this.modList[mod.name];
     }
 
     /** Creates instance of module and injects dependencies into its constructor.
@@ -95,7 +92,7 @@ class peanutContainer {
      *	 @return {object} - module instance
      */
     get(moduleName) {
-        let moduleReg = this.modlist[moduleName];
+        let moduleReg = this.modList[moduleName];
         try {
             if (moduleReg === undefined)
                 throw new Error(`Module ${moduleName} not found`);
@@ -106,16 +103,20 @@ class peanutContainer {
                 for (let dep of moduleReg.deps) {
                     moduleDeps.push(this.get(dep));
                 }
-
-                if (typeof(moduleReg.def) === 'function') {
-                    // Inject dependencies into constructor.
-                    // to do: support factory functions, not just classes
-                    moduleReg.instance = new moduleReg.def(...moduleDeps);
-                } else
-                    throw new Error(`Module must be a class: ${moduleName}`);
-
-                if (moduleReg.instance === undefined) {
-                    console.warn(`Instantiation failed for ${moduleName}`);
+                if (typeof(moduleReg.def) === 'function') { 
+					if (/^\s*class\s/.test(moduleReg.def)) 
+                      moduleReg.instance = new moduleReg.def(...moduleDeps); // Inject dependencies into constructor.
+                    else {
+                        try {
+                            moduleReg.instance = moduleReg.def.apply(null, moduleDeps); // inject dependencies into factory via params.
+                        } catch (e) {
+                            // Is function a constructor and thus needs 'new'? Constructor funcs are not currently supported.
+                            throw new Error(`Instantiation of function ${moduleName} without 'new' failed. Error: ${e}.`);
+                        }
+                    }
+                }
+                if (!moduleReg.instance) {
+                    throw new Error(`Instantiation failed for ${moduleName}`);
                 }
             }
         } catch (e) {
@@ -129,7 +130,7 @@ class peanutContainer {
      *
      */
     removeAll() {
-        this.modlist = {};
+        this.modList = {};
     }
 }
 

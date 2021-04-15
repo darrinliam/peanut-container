@@ -1,7 +1,7 @@
 {
   "name": "peanut-container",
-  "version": "1.0.1",
-  "description": "Node.js IoC container that injects dependencies into constructors.",
+  "version": "1.0.2",
+  "description": "Node.js IoC container that injects dependencies into class constructors and factory functions.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint **/*.js",

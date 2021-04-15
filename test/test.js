@@ -62,23 +62,22 @@ if (rhymesApp)
             });
         });
         
-        describe("Error 4: registering a factory function.", function() {
+        describe("Error 4: registering a constructor function.", function() {
             it(' ', function() {
               const testfunc = function (val) {
                 this.val = val;
-                return;
               }
+              peanutContainer.register({ name: 'constructorFunc', deps: [], def: testfunc}),
               assert.strictEqual(
-                peanutContainer.register({ name: 'func', deps: [], def: testfunc}),
+                peanutContainer.get('constructorFunc'),
                 null);
             });
         });
         
         describe("Error 5: Missing module information.", function() {
             it(' ', function() {
-              const testfunc = function (val) {
-              this.val = val;
-              return;
+              const testfunc = function () {
+              return { };
             }
             assert.strictEqual(
               peanutContainer.register({ deps: [], def: testfunc}),

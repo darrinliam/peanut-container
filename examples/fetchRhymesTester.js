@@ -24,11 +24,11 @@ class fetchRhymesTesterClass {
     }
 
     connect() {
-        console.log(`${this.dbMsg.connected}: ${this.config.server}`);
+        console.log(`${this.dbMsg.connected} ${this.config.server}`);
     }
 
     disconnect() {
-        console.log(`${this.dbMsg.disconnected}: ${this.config.server}`);
+        console.log(`${this.dbMsg.disconnected} ${this.config.server}`);
     }
 
     fetch(word) {
