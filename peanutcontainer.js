@@ -48,7 +48,7 @@ class peanutContainer {
      *     method.
      *
      *  @param {Object} mod - contains keys for name, dependencies, and constructor func
-     *	
+     *
      */
     register(mod) {
         try {
@@ -89,7 +89,7 @@ class peanutContainer {
     /** Creates instance of module and injects dependencies into its constructor.
      *
      *  @param {string} moduleName 
-     *	 @return {object} - module instance
+     *  @return {object} - module instance
      */
     get(moduleName) {
         let moduleReg = this.modList[moduleName];
@@ -104,7 +104,7 @@ class peanutContainer {
                     moduleDeps.push(this.get(dep));
                 }
                 if (typeof(moduleReg.def) === 'function') { 
-					if (/^\s*class\s/.test(moduleReg.def)) 
+                    if (/^\s*class\s/.test(moduleReg.def)) 
                       moduleReg.instance = new moduleReg.def(...moduleDeps); // Inject dependencies into constructor.
                     else {
                         try {
